@@ -1,3 +1,5 @@
+
+
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -10,7 +12,8 @@ import { TournamentsPage } from './../pages/tournaments/tournaments';
 import { TeamDetailPage } from './../pages/team-detail/team-detail';
 import { TeamsPage } from './../pages/teams/teams';
 import { GamePage } from './../pages/game/game';
-
+import {StandingsPage} from './../pages/standings/standings';
+import {TeamHomePage} from './../pages/team-home/team-home';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -23,6 +26,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
    TournamentsPage,
    TeamDetailPage,
    TeamsPage,
+   TeamHomePage,
+   StandingsPage,
    GamePage
   ],
   imports: [
@@ -38,6 +43,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
    TournamentsPage,
    TeamDetailPage,
    TeamsPage,
+   TeamHomePage,
+   StandingsPage,
    GamePage
   ],
   providers: [

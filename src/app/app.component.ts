@@ -12,10 +12,13 @@ import { TeamDetailPage } from './../pages/team-detail/team-detail';
 import { TeamsPage } from './../pages/teams/teams';
 import { GamePage } from './../pages/game/game';
 
-
+import {HttpModule} from '@angular/http';
+import { EliteApi } from './shared/elite-api.service';
 
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app.html',
+providers: [EliteApi,HttpModule]
+
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
@@ -32,6 +35,7 @@ export class MyApp {
       
        // { title: 'Home', component: HomePage },
       //{ title: 'List', component: ListPage }
+    
       { title: 'MyTeams', component: MyTeamsPage },
       {title:'Tournaments',component:TournamentsPage},
       {title:'Teams',component:TeamsPage},
@@ -53,9 +57,7 @@ export class MyApp {
     });
   }
 
-  openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
-  }
+ goHome(){this.nav.push(MyTeamsPage);}
+goToTournaments(){this.nav.push(TournamentsPage);}
+  
 }
