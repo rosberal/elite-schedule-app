@@ -14,8 +14,12 @@ export class MyTeamsPage
 {
     constructor(private nav: NavController){}
 
-goToTournaments(){this.nav.push(TournamentsPage);}
-
+goToTournaments(){
+   
+    this.nav.push(TournamentsPage);
+   
 }
+}
+    
 
 

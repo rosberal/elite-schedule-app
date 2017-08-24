@@ -31,8 +31,11 @@ standingsTab=StandingsPage;
   this.navCtrl.popToRoot()
   }
 
-
+ionViewWillEnter(){
+ console.log('ate aqui 5');
+}
   ionViewDidLoad() {
+    console.log('ate aqui 6  ');
     console.log('ionViewDidLoad TeamHomePage');
   }
 

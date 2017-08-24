@@ -4,8 +4,7 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-//import { HomePage } from '../pages/home/home';
-//import { ListPage } from '../pages/list/list';
+
 import { MyTeamsPage } from '../pages/my-teams/my-teams.page';
 import { TournamentsPage } from './../pages/tournaments/tournaments';
 import { TeamDetailPage } from './../pages/team-detail/team-detail';
@@ -17,7 +16,8 @@ import { EliteApi } from './shared/elite-api.service';
 
 @Component({
   templateUrl: 'app.html',
-providers: [EliteApi,HttpModule]
+  //imports: [],
+  providers: [EliteApi,HttpModule]
 
 })
 export class MyApp {
@@ -54,10 +54,11 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      
     });
   }
 
  goHome(){this.nav.push(MyTeamsPage);}
 goToTournaments(){this.nav.push(TournamentsPage);}
-  
+ 
 }

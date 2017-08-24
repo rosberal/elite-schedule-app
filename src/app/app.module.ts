@@ -1,3 +1,4 @@
+import { HttpModule } from '@angular/http';
 
 
 import { BrowserModule } from '@angular/platform-browser';
@@ -33,6 +34,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
