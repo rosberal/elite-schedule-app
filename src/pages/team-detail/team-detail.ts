@@ -20,16 +20,18 @@ import * as _ from 'lodash';
 export class TeamDetailPage {
  games:any[];
   team: any;
-  private tourneyData: any;
+  tourneyData: any;
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     private eliteApi:EliteApi) {
   this.team=this.navParams.data;
   console.log('**nav params:',this.navParams)
-  }
+  
+}
  
   ionViewDidLoad() {
- this.team=this.navParams.data;
+ console.log('ate aqui');
+    this.team=this.navParams.data;
  this.tourneyData=this.eliteApi.getCurrentTourney();
 this.games=_.chain(this.tourneyData.games)
 .filter(g=>g.team1Id===this.team.id||g.team2Id===this.team.id)
