@@ -11,7 +11,11 @@ export class EliteApi
 
 currentTourney: any={};
 
-    constructor(private http:Http){}
+    constructor(private http:Http){
+
+       //this.getTournaments(); //tentativa de coerrigir erro
+
+    }
 
 
 getTournaments()
