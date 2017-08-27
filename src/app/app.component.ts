@@ -19,6 +19,8 @@ import { EliteApi } from './shared/elite-api.service';
   //imports: [],
   providers: [EliteApi,HttpModule]
 
+
+
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;

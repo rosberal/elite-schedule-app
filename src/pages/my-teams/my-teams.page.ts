@@ -5,10 +5,7 @@ import { TournamentsPage } from './../tournaments/tournaments';
 import { LoadingController,NavController } from 'ionic-angular';
 import { Component } from '@angular/core';
 
- @Component({
-  selector:'my-teams-header',
-templateUrl:'my-teams.page.html',
-})
+
 
         @Component({
             selector: 'page-myteams',
