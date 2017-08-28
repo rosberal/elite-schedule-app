@@ -49,7 +49,7 @@ return {
   time:Date.parse(g.time),
   location:g.location,
   locationUrl: g.locationUrl,scoreDisplay:scoreDisplay,
-  homeAway:(isTeam1 ? "Vs.":"at")
+  homeAway:(isTeam1 ? "vs.":"at")
 };
 })
 .value();
