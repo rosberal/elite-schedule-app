@@ -3,6 +3,7 @@ import { EliteApi } from './../../app/shared/elite-api.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import * as _ from 'lodash';
+import { TournamentsPage } from '../tournaments/tournaments';
 
 
 /**
@@ -20,17 +21,21 @@ import * as _ from 'lodash';
 export class TeamDetailPage {
  games:any[];
   team: any;
-  tourneyData: any;
-  constructor(public navCtrl: NavController, 
+  teamStanding: any;
+  private tourneyData: any;
+
+  constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private eliteApi:EliteApi) {
   this.team=this.navParams.data;
+  this.tourneyData=this.eliteApi.getCurrentTourney();
+  this.teamStanding = _.find(this.tourneyData.standings,{'teamId':this.team.id});
   console.log('**nav params:',this.navParams)
-  
+
 }
- 
+
   ionViewDidLoad() {
- console.log('ate aqui');
+ console.log('ate aqui 2');
     this.team=this.navParams.data;
  this.tourneyData=this.eliteApi.getCurrentTourney();
 this.games=_.chain(this.tourneyData.games)
@@ -43,12 +48,13 @@ return {
   opponent:opponentName,
   time:Date.parse(g.time),
   location:g.location,
-  locationUrl: g.locationUrl,scoredisplay:scoreDisplay,
+  locationUrl: g.locationUrl,scoreDisplay:scoreDisplay,
   homeAway:(isTeam1 ? "Vs.":"at")
 };
 })
 .value();
-
+this.teamStanding = _.find(this.tourneyData.standings,{'teamId':this.team.id});
+console.log('TeamStanding', this.teamStanding);
 }
 getScoreDisplay(isTeam1,team1Score,team2Score){
   if (team1Score&& team2Score){
