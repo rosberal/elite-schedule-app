@@ -13,23 +13,29 @@ import { GamePage } from './../pages/game/game';
 
 import {HttpModule} from '@angular/http';
 import { EliteApi } from './shared/elite-api.service';
+import { UserSettings } from './shared/user-settings.service';
 
 @Component({
   templateUrl: 'app.html',
   //imports: [],
-  providers: [EliteApi,HttpModule]
+  providers: [EliteApi,HttpModule,UserSettings]
 
 
 
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-
+  favoriteTeams:any[];
   rootPage: any = MyTeamsPage;
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform,
+     public statusBar: StatusBar,
+      public splashScreen: SplashScreen,
+    private userSettings:UserSettings
+  )
+    {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -59,8 +65,10 @@ export class MyApp {
 
     });
   }
-
- goHome(){this.nav.push(MyTeamsPage);}
+refreshfavorites(){
+  this.favoriteTeams=this.userSettings.getAllFavorites();
+}
+goHome(){this.nav.push(MyTeamsPage);}
 goToTournaments(){this.nav.push(TournamentsPage);}
 
 }

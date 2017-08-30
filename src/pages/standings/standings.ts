@@ -15,6 +15,7 @@ import  * as _ from 'lodash'
   templateUrl: 'standings.html',
 })
 export class StandingsPage {
+date
   standings: any[];
   team: any;
   allStandings: any;

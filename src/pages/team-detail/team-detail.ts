@@ -1,9 +1,11 @@
+import { Component } from '@angular/core';
+import { IonicPage,ToastController,AlertController, NavController, NavParams } from 'ionic-angular';
+import * as _ from 'lodash';
+import * as moment from 'moment';
+import { TournamentsPage } from '../tournaments/tournaments';
+import { UserSettings } from './../../app/shared/user-settings.service';
 import { GamePage } from './../game/game';
 import { EliteApi } from './../../app/shared/elite-api.service';
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import * as _ from 'lodash';
-import { TournamentsPage } from '../tournaments/tournaments';
 
 
 /**
@@ -19,18 +21,27 @@ import { TournamentsPage } from '../tournaments/tournaments';
   templateUrl: 'team-detail.html',
 })
 export class TeamDetailPage {
- games:any[];
+  allGames: any[];
+  dateFilter:string;
+  games:any[];
   team: any;
   teamStanding: any;
   private tourneyData: any;
+private toast: any;
+  useDateFilter=false;
+  isFollowing=false;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    private eliteApi:EliteApi) {
+    private eliteApi:EliteApi,
+  private alertController:AlertController,
+  private toastController:ToastController,
+private userSettings:UserSettings) {
   this.team=this.navParams.data;
   this.tourneyData=this.eliteApi.getCurrentTourney();
   this.teamStanding = _.find(this.tourneyData.standings,{'teamId':this.team.id});
   console.log('**nav params:',this.navParams)
+  console.log('Construtor da teamsdetailpage');
 
 }
 
@@ -53,7 +64,11 @@ return {
 };
 })
 .value();
+this.allGames=this.games;
 this.teamStanding = _.find(this.tourneyData.standings,{'teamId':this.team.id});
+console.log('TeamStanding', this.teamStanding);
+this.userSettings.isFavoriteTeam(this.team.id).then(value =>this.isFollowing=value);
+
 console.log('TeamStanding', this.teamStanding);
 }
 getScoreDisplay(isTeam1,team1Score,team2Score){
@@ -71,9 +86,58 @@ gameClicked($event,game)
 {
 
   let sourceGame=this.tourneyData.games.find(g=>g.id===game.gameId);
-
   this.navCtrl.parent.parent.push(GamePage,sourceGame);
 
 }
+getScoreWorL(game){
+return game.scoreDisplay ? game.scoreDisplay[0]:'';
+}
+
+getScoreDisplayBadgeClass(game){
+
+ //console.log("teste2");
+ // console.log("teste",game.scoreDisplay.indexOf('W:')===0?'badge-primary':'badge-danger');
+
+return game.scoreDisplay.indexOf('W:')===0 ? 'primary':'danger';
+}
+
+dateChanged(){
+if (this.useDateFilter) {
+    this.games=_.filter(this.allGames,g=>moment(g.time).isSame(this.dateFilter,'day'));
+} else {
+this.games=this.allGames;
+}
+
+}
+toggleFollow(){
+if(this.isFollowing){
+  let confirm=this.alertController.create({
+title:'Unfollow?',
+message:'Are you sure you want to unfollow?',
+buttons: [
+{text: 'Yes',
+handler:()=>{this.isFollowing=false;
+  this.userSettings.unfavoriteTeam(this.team);
+
+
+let  toast=this.toastController.create({
+  message: 'You have unfollowed this team.',
+  duration:2000,
+  position:'bottom'
+});
+toast.present();
+
+}},
+{text: 'No'}
+]
+  });
+confirm.present();
+} else
+{this.isFollowing=true;
+this.userSettings.favoriteTeam(this.team,  this.tourneyData.tournament.Id,
+  this.tourneyData.tournament.name);
+}
+}
+
 
 }
