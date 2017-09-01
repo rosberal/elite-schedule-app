@@ -1,4 +1,4 @@
-@import '../pages/my-teams/myteams.page'
+ @import '../pages/my-teams/myteams.page'
 
 
 <ion-header>
@@ -34,8 +34,8 @@
     <ion-list-header class="my-teams-header">Followed Teams</ion-list-header>
     <button ion-item *ngFor ="let item of favorites" (click)="favoriteTapped($event,item)">
         <ion-icon name='star'></ion-icon>
-    {{item.team.name}}
-    <p>{{item.tournamentName}}</p>
+      {{item.team.name}}
+      <p>{{item.tournamentName}}</p>
     </button>
 </ion-list>
 <ion-card-content>

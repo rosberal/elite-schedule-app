@@ -14,23 +14,53 @@
 
 
 <ion-content padding>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-row></ion-row>
+        <ion-col width-50>
+          <h2>Record: {{teamStanding.wins}}-{{teamStanding.losses}}</h2>
+          <p>Coach: {{team.coach}}</p>
+</ion-col>
+        <ion-col width-50 text-right>
+<button ion-button outline (click)="toggleFollow()" *ngIf="!isFollowing">
+  <ion-icon name="star" > Add Favorite</ion-icon>
+</button>
+<button ion-button outline (click)="toggleFollow()" *ngIf="isFollowing">
+  <ion-icon name="star" > </ion-icon>
+</button>
+        </ion-col>
+
+<ion-item>
+  <ion-label>Date Filter:</ion-label>
+<ion-toggle [(ngModel)]="useDateFilter" (ionChange)=dateChanged()></ion-toggle>
+<ion-datetime displayFormat="D/M/YYYY" pickerFormat="D/M/YYYY"
+[(ngModel)]="dateFilter" (ionChange)=dateChanged()
+[(disabled)]="!useDateFilter"></ion-datetime>
+</ion-item>
+
+
+
+
+    </ion-card-content>
+  </ion-card>
+
 <ion-list>
   <ion-item *ngFor="let game of games" (click)="gameClicked($event,game)">
 <ion-row>
-  <ion-col>
-    <p>{{game.time | date: 'dd/mm/yy'}}</p>
+  <ion-col width-20>
+    <p>{{game.time | date: 'dd/MM/yy'}}</p>
     <p>{{game.time | date: 'shortTime'}}</p>
 </ion-col>
-<ion-col>
-    <p> {{game.homeAway}}  {{game.oppoment}}</p>
+<ion-col width-60>
+    <p>{{game.homeAway}} {{game.opponent}}</p>
     <p>{{game.location}}</p>
 </ion-col>
-
-<ion-col>
+<ion-col width-20>
   <h4>{{game.scoreDisplay}}</h4>
+<ion-badge [color] = "getScoreDisplayBadgeClass(game)" >{{getScoreWorL(game)}}</ion-badge>
 </ion-col>
 </ion-row>
-
 </ion-item>
 </ion-list>
 </ion-content>
