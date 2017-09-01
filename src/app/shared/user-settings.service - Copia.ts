@@ -79,5 +79,5 @@ export class UserSettings {
         } else {
             return new Promise(resolve => resolve());
         }
-    }
+      }
 }

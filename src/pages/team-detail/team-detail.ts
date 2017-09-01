@@ -41,7 +41,6 @@ private userSettings:UserSettings) {
   this.tourneyData=this.eliteApi.getCurrentTourney();
   this.teamStanding = _.find(this.tourneyData.standings,{'teamId':this.team.id});
   console.log('**nav params:',this.navParams)
-  console.log('Construtor da teamsdetailpage');
 
 }
 
@@ -117,7 +116,9 @@ message:'Are you sure you want to unfollow?',
 buttons: [
 {text: 'Yes',
 handler:()=>{this.isFollowing=false;
-  this.userSettings.unfavoriteTeam(this.team);
+  console.log('vai rodar o unfavoriteTeam');
+  console.log('tournament.id',this.tourneyData.tournament);
+    this.userSettings.unfavoriteTeam(this.team);
 
 
 let  toast=this.toastController.create({
@@ -133,8 +134,11 @@ toast.present();
   });
 confirm.present();
 } else
-{this.isFollowing=true;
-this.userSettings.favoriteTeam(this.team,  this.tourneyData.tournament.Id,
+{
+  this.isFollowing=true;
+  console.log('vai rodar o favoriteTeam');
+  console.log(this.team,'tournament.id',this.tourneyData.tournament);
+  this.userSettings.favoriteTeam(this.team,  this.tourneyData.tournament.id,
   this.tourneyData.tournament.name);
 }
 }
