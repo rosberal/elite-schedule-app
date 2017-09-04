@@ -30,7 +30,7 @@ export class UserSettings {
     console.log("sql fav ", this.storage);
     console.log("sql item ", item);
     this.storage.set(team.id.toString(), JSON.stringify(item)).then(data => {
-    //  this.events.publish("favorites:changed");
+      this.events.publish("favorites:changed");
       console.log("sql fav 2", this.storage);
     });
   }
@@ -38,7 +38,7 @@ export class UserSettings {
   unfavoriteTeam(team) {
     console.log("sql unfav", this.storage);
     this.storage.remove(team.id.toString()).then(data => {
-   //   this.events.publish("favorites:changed");
+     this.events.publish("favorites:changed");
       console.log("sql unfav 2", this.storage);
     });
   }

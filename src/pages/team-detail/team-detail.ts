@@ -143,5 +143,16 @@ confirm.present();
 }
 }
 
+refreshAll(refresher)
+{
+  console.log('Chamou a função do refresher');
+  this.eliteApi.refreshCurrentTourney().subscribe(() =>
+  {
+    refresher.complete();
+    this.ionViewDidLoad();
+});
+}
+
+
 
 }

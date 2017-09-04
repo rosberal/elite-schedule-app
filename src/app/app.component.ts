@@ -1,11 +1,8 @@
-
-
 import { Component, ViewChild } from '@angular/core';
 import { App, Nav, Platform, LoadingController } from 'ionic-angular';
+import { Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
-
 import { MyTeamsPage } from '../pages/my-teams/my-teams.page';
 import { TournamentsPage } from './../pages/tournaments/tournaments';
 import { TeamDetailPage } from './../pages/team-detail/team-detail';
@@ -16,7 +13,6 @@ import {HttpModule} from '@angular/http';
 import { EliteApi } from './shared/elite-api.service';
 import { UserSettings } from './shared/user-settings.service';
 import { TeamHomePage } from '../pages/team-home/team-home';
-
 
 @Component({
   templateUrl: 'app.html',
@@ -38,7 +34,8 @@ export class MyApp {
       public splashScreen: SplashScreen,
     private userSettings:UserSettings,
     private  eliteApi:EliteApi,
-private loadingController: LoadingController
+private loadingController: LoadingController,
+private events:Events
   )
     {
     this.initializeApp();
@@ -67,23 +64,34 @@ private loadingController: LoadingController
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-
-      this.rootPage = MyTeamsPage;
+     //this.refreshFavorites();
+     this.events.subscribe('favorites:changed', () => this.refreshFavorites());
+     this.rootPage = MyTeamsPage;
       //this.refreshFavorites();
 
       /* this.userSettings.initStorage().then(() => {
 
         this.rootPage = MyTeamsPage;
         this.refreshFavorites();
-        this.events.subscribe('favorites:changed', () => this.refreshFavorites());
+
       });*/
 
     });
   }
 
-refreshfavorites(){
-  this.userSettings.getAllFavorites().then(saida =>this.favoriteTeams=saida);
-console.log('lista de favoritos',this.favoriteTeams);
+refreshFavorites(){
+  let loader=this.loadingController.create({content:'Getting data...'});
+  loader.present();
+
+
+// this.userSettings.getAllFavorites().then(saida =>this.favoriteTeams=saida);
+//console.log('lista de favoritos',this.favoriteTeams);
+
+this.userSettings.getAllFavorites().then(saida =>{this.favoriteTeams=saida;
+ // console.log('lista de favoritos',this.favorites);
+ // console.log('lista de favoritos 2',this.favorites[0].team.name);
+  loader.dismiss();
+});
 
 }
 goHome(){this.nav.push(MyTeamsPage);}

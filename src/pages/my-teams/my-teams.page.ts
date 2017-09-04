@@ -65,20 +65,16 @@ this.eliteApi.getTournamentData(favorite.tournamentId)
 }
 
 
-ionViewWillEnter(){
+ ionViewDidEnter(){
 
 
   let loader=this.loadingController.create({content:'Getting data...'});
-  loader.present();
-
-
+   loader.present();
   this.userSettings.getAllFavorites().then(saida =>{this.favorites=saida;
-    console.log('lista de favoritos',this.favorites);
-    console.log('lista de favoritos 2',this.favorites[0].team.name);
-    loader.dismiss();
+   // console.log('lista de favoritos',this.favorites);
+   // console.log('lista de favoritos 2',this.favorites[0].team.name);
+   loader.dismiss();
   });
-
-
 }
 
 }
