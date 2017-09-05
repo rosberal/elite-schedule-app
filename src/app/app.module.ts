@@ -16,7 +16,7 @@ import {StandingsPage} from './../pages/standings/standings';
 import {TeamHomePage} from './../pages/team-home/team-home';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
+import{MapPage} from'./../pages/map/map';
 @NgModule({
   declarations: [
     MyApp,
@@ -28,7 +28,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
    TeamsPage,
    TeamHomePage,
    StandingsPage,
-   GamePage
+   GamePage,
+   MapPage
   ],
   imports: [
     BrowserModule,
@@ -48,7 +49,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
    TeamsPage,
    TeamHomePage,
    StandingsPage,
-   GamePage
+   GamePage,
+   MapPage
   ],
   providers: [
     StatusBar,
