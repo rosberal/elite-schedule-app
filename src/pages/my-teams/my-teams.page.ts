@@ -5,7 +5,7 @@ import { TournamentsPage } from './../tournaments/tournaments';
 import { LoadingController,NavController } from 'ionic-angular';
 import { Component } from '@angular/core';
 import { UserSettings } from '../../app/shared/user-settings.service';
-
+import { MapPage } from './../map/map';
 
 
         @Component({
@@ -76,6 +76,11 @@ this.eliteApi.getTournamentData(favorite.tournamentId)
    loader.dismiss();
   });
 }
+
+temporaryGoToMap(){
+  this.nav.push(MapPage);
+}
+
 
 }
 

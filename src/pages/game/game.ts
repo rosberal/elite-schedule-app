@@ -1,7 +1,8 @@
-import { TeamHomePage } from './../team-home/team-home';
+import {TeamHomePage } from './../team-home/team-home';
 import { EliteApi } from './../../app/shared/elite-api.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import{MapPage  } from './../map/map';
 
  /* Generated class for the GamePage page.
  *
@@ -41,7 +42,11 @@ teamTapped(teamId)
 
 goToDirections(){}
 
-goToMap(){}
+goToMap(){
+this.navCtrl.push(MapPage,this.game)
+}
+
+
 
 isWinner(score1,score2){
 
